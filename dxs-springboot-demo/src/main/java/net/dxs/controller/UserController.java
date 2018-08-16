@@ -2,17 +2,18 @@ package net.dxs.controller;
 
 import java.util.Date;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import net.dxs.pojo.User;
 
-@Controller
+//@Controller
+@RestController // @RestController = @Controller + @ResponseBody
+@RequestMapping("user")
 public class UserController {
 
 	@RequestMapping("/getUser")
-	@ResponseBody
+//	@ResponseBody
 	public User getUser() {
 		User u = new User();
 		u.setName("lijian");
