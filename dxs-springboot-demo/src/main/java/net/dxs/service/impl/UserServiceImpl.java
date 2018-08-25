@@ -26,26 +26,31 @@ public class UserServiceImpl implements UserService {
 	private SysUserMapperCustom userMapperCustom;
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void saveUser(SysUser user) throws Exception {
 		userMapper.insert(user);
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void updateUser(SysUser user) {
 		userMapper.updateByPrimaryKeySelective(user);
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void deleteUser(String userId) {
 		userMapper.deleteByPrimaryKey(userId);
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.SUPPORTS)
 	public SysUser queryUserById(String userId) {
 		return userMapper.selectByPrimaryKey(userId);
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.SUPPORTS)
 	public List<SysUser> queryUserList(SysUser user) {
 		Example example = new Example(SysUser.class);
 		Example.Criteria criteria = example.createCriteria();
@@ -61,6 +66,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.SUPPORTS)
 	public List<SysUser> queryUserListPaged(SysUser user, Integer page, Integer pageSize) {
 		// 开始分页
 		PageHelper.startPage(page, pageSize);
@@ -78,6 +84,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.SUPPORTS)
 	public SysUser queryUserByIdCustom(String userId) {
 		List<SysUser> userList = userMapperCustom.queryUserSimplyInfoById(userId);
 		if (userList != null && !userList.isEmpty()) {
@@ -87,6 +94,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void saveUserTransactional(SysUser user) {
 		userMapper.insert(user);
 		int a = 1 / 0;
