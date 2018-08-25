@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
 import com.github.pagehelper.PageHelper;
@@ -77,23 +79,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public SysUser queryUserByIdCustom(String userId) {
-
 		List<SysUser> userList = userMapperCustom.queryUserSimplyInfoById(userId);
-
 		if (userList != null && !userList.isEmpty()) {
 			return (SysUser) userList.get(0);
 		}
-
 		return null;
 	}
 
 	@Override
 	public void saveUserTransactional(SysUser user) {
-
 		userMapper.insert(user);
-
 		int a = 1 / 0;
-
 		user.setIsDelete(1);
 		userMapper.updateByPrimaryKeySelective(user);
 	}

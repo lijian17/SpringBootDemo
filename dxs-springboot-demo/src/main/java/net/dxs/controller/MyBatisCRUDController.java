@@ -94,9 +94,7 @@ public class MyBatisCRUDController {
 
 	@RequestMapping("/saveUserTransactional")
 	public DxsJSONResult saveUserTransactional() {
-
 		String userId = sid.nextShort();
-
 		SysUser user = new SysUser();
 		user.setId(userId);
 		user.setUsername("lijian" + new Date());
@@ -104,9 +102,7 @@ public class MyBatisCRUDController {
 		user.setPassword("abc123");
 		user.setIsDelete(0);
 		user.setRegistTime(new Date());
-
 		userService.saveUserTransactional(user);
-
 		return DxsJSONResult.ok("保存成功");
 	}
 }
