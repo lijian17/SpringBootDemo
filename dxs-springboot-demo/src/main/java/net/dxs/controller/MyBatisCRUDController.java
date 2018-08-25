@@ -69,55 +69,44 @@ public class MyBatisCRUDController {
 
 	@RequestMapping("/queryUserList")
 	public DxsJSONResult queryUserList() {
-
 		SysUser user = new SysUser();
-//		user.setUsername("dxs");
-//		user.setNickname("lijian");
-		user.setPassword("abc123");
-
+		user.setUsername("dxs");
 		List<SysUser> userList = userService.queryUserList(user);
-
 		return DxsJSONResult.ok(userList);
 	}
 
-//	@RequestMapping("/queryUserListPaged")
-//	public DxsJSONResult queryUserListPaged(Integer page) {
-//
-//		if (page == null) {
-//			page = 1;
-//		}
-//
-//		int pageSize = 10;
-//
-//		SysUser user = new SysUser();
-////		user.setNickname("lijian");
-//
-//		List<SysUser> userList = userService.queryUserListPaged(user, page, pageSize);
-//
-//		return DxsJSONResult.ok(userList);
-//	}
-//
-//	@RequestMapping("/queryUserByIdCustom")
-//	public DxsJSONResult queryUserByIdCustom(String userId) {
-//
-//		return DxsJSONResult.ok(userService.queryUserByIdCustom(userId));
-//	}
-//
-//	@RequestMapping("/saveUserTransactional")
-//	public DxsJSONResult saveUserTransactional() {
-//
-//		String userId = sid.nextShort();
-//
-//		SysUser user = new SysUser();
-//		user.setId(userId);
-//		user.setUsername("lijian" + new Date());
-//		user.setNickname("lijian" + new Date());
-//		user.setPassword("abc123");
-//		user.setIsDelete(0);
-//		user.setRegistTime(new Date());
-//
-//		userService.saveUserTransactional(user);
-//
-//		return DxsJSONResult.ok("保存成功");
-//	}
+	@RequestMapping("/queryUserListPaged")
+	public DxsJSONResult queryUserListPaged(Integer page) {
+		if (page == null) {
+			page = 1;
+		}
+		int pageSize = 2;
+		SysUser user = new SysUser();
+		// user.setNickname("lijian");
+		List<SysUser> userList = userService.queryUserListPaged(user, page, pageSize);
+		return DxsJSONResult.ok(userList);
+	}
+
+	@RequestMapping("/queryUserByIdCustom")
+	public DxsJSONResult queryUserByIdCustom(String userId) {
+		return DxsJSONResult.ok(userService.queryUserByIdCustom(userId));
+	}
+
+	@RequestMapping("/saveUserTransactional")
+	public DxsJSONResult saveUserTransactional() {
+
+		String userId = sid.nextShort();
+
+		SysUser user = new SysUser();
+		user.setId(userId);
+		user.setUsername("lijian" + new Date());
+		user.setNickname("lijian" + new Date());
+		user.setPassword("abc123");
+		user.setIsDelete(0);
+		user.setRegistTime(new Date());
+
+		userService.saveUserTransactional(user);
+
+		return DxsJSONResult.ok("保存成功");
+	}
 }
