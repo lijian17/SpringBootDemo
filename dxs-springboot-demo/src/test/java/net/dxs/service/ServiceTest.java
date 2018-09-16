@@ -16,7 +16,7 @@ public class ServiceTest {
 
 	@Resource
 	MailService mailService;
-	
+
 	@Resource
 	TemplateEngine templateEngine;
 
@@ -43,7 +43,7 @@ public class ServiceTest {
 	}
 
 	@Test
-	public void sendInlinResourceMailTest() throws MessagingException {
+	public void sendInlinResourceMailTest() {
 		String imgPath = "C:\\Users\\lijian\\Desktop\\1.png";
 		String rscId = "img001";
 		String content = "<html><body>这是带图片的邮件：<img src=\'cid:" + rscId + "\' /><img src='cid:" + rscId
@@ -52,10 +52,10 @@ public class ServiceTest {
 	}
 
 	@Test
-	public void testTemplateMailTest() throws MessagingException{
+	public void testTemplateMailTest() throws MessagingException {
 		Context context = new Context();
 		context.setVariable("id", "007");
-		
+
 		String emailContent = templateEngine.process("thymeleaf/emailTemplate", context);
 
 		mailService.sendHtmlMail("lijian_17@163.com", "这是一封模板引擎邮件", emailContent);
