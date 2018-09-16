@@ -90,4 +90,31 @@ public class MailService {
 		mailSender.send(message);
 	}
 
+	/**
+	 * 发送带静态图片的邮件
+	 * 
+	 * @param to      发送给
+	 * @param subject 发送主题
+	 * @param content 发送正文
+	 * @param rscPath 图片路径
+	 * @param rscId   图片ID
+	 * @throws MessagingException
+	 */
+	public void sendInlinResourceMail(String to, String subject, String content, String rscPath, String rscId)
+			throws MessagingException {
+		MimeMessage message = mailSender.createMimeMessage();
+
+		MimeMessageHelper helper = new MimeMessageHelper(message, true);
+		helper.setTo(to);
+		helper.setSubject(subject);
+		helper.setText(content, true);
+		helper.setFrom(from);
+
+		FileSystemResource file = new FileSystemResource(new File(rscPath));
+		helper.addInline(rscId, file);
+		helper.addInline(rscId, file);
+
+		mailSender.send(message);
+	}
+
 }

@@ -36,4 +36,13 @@ public class ServiceTest {
 		String filePath = "C:\\Users\\lijian\\Desktop\\Java正则表达式Pattern和Matcher详解.java";
 		mailService.sendAttachmentsMail("lijian_17@163.com", "这是一封带附件的邮件", "这是一封带附件的邮件正文", filePath);
 	}
+
+	@Test
+	public void sendInlinResourceMailTest() throws MessagingException {
+		String imgPath = "C:\\Users\\lijian\\Desktop\\1.png";
+		String rscId = "img001";
+		String content = "<html><body>这是带图片的邮件：<img src=\'cid:" + rscId + "\' /><img src='cid:" + rscId
+				+ "' /></body></html>";
+		mailService.sendInlinResourceMail("lijian_17@163.com", "这是一封带图片的邮件", content, imgPath, rscId);
+	}
 }
