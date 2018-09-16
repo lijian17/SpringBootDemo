@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -14,6 +16,9 @@ public class ServiceTest {
 
 	@Resource
 	MailService mailService;
+	
+	@Resource
+	TemplateEngine templateEngine;
 
 	@Test
 	public void sayHelloTest() {
@@ -44,5 +49,15 @@ public class ServiceTest {
 		String content = "<html><body>这是带图片的邮件：<img src=\'cid:" + rscId + "\' /><img src='cid:" + rscId
 				+ "' /></body></html>";
 		mailService.sendInlinResourceMail("lijian_17@163.com", "这是一封带图片的邮件", content, imgPath, rscId);
+	}
+
+	@Test
+	public void testTemplateMailTest() throws MessagingException{
+		Context context = new Context();
+		context.setVariable("id", "007");
+		
+		String emailContent = templateEngine.process("thymeleaf/emailTemplate", context);
+
+		mailService.sendHtmlMail("lijian_17@163.com", "这是一封模板引擎邮件", emailContent);
 	}
 }
