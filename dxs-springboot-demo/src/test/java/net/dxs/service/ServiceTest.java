@@ -30,4 +30,10 @@ public class ServiceTest {
 		String content = "<html><body><h3>hello world，这是一封html邮件<h3></body></html>";
 		mailService.sendHtmlMail("lijian_17@163.com", "这是一封html邮件", content);
 	}
+
+	@Test
+	public void sendAttachmentsMailTest() throws MessagingException {
+		String filePath = "C:\\Users\\lijian\\Desktop\\Java正则表达式Pattern和Matcher详解.java";
+		mailService.sendAttachmentsMail("lijian_17@163.com", "这是一封带附件的邮件", "这是一封带附件的邮件正文", filePath);
+	}
 }
